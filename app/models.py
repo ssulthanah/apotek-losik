@@ -42,7 +42,7 @@ class pembelian(models.Model):
         return str(self.idsupplier)
 
 class detailpenjualan(models.Model):
-    iddetailpenjualan = models.CharField(max_length=5, primary_key=True)
+    iddetailpenjualan = models.AutoField(max_length=5, primary_key=True)
     idpenjualan = models.ForeignKey(penjualan, on_delete=models.CASCADE)
     idobat = models.ForeignKey(obat, on_delete=models.CASCADE)
     jumlahobatterjual = models.IntegerField()
@@ -51,7 +51,7 @@ class detailpenjualan(models.Model):
         return str(self.idpenjualan)
 
 class detailpembelian(models.Model):
-    iddetailpembelian = models.CharField(max_length=5, primary_key=True)
+    iddetailpembelian = models.AutoField(max_length=5, primary_key=True)
     idpembelian = models.ForeignKey(pembelian, on_delete=models.CASCADE)
     idobat = models.ForeignKey(obat, on_delete=models.CASCADE)
     jumlahobatdibeli = models.IntegerField()
