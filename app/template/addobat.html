@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Data Obat</title>
+</head>
+<body>
+    <h1>Obat</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Jenis Obat</th>
+                <td>
+                    <input type="text" name="jenisobat">
+                </td>
+            </tr>
+            <tr>
+                <th>Nama Obat</th>
+                <td>
+                    <input type="text" name="namaobat">
+                </td>
+            </tr>
+            <tr>
+                <th>Jumlah Stock</th>
+                <td>
+                    <input type="number" name="jumlahstock">
+                </td>
+            </tr>
+            <tr>
+                <th>Harga Beli</th>
+                <td>
+                    <input type="number" name="hargabeli">
+                </td>
+            </tr>
+            <tr>
+                <th>Harga Jual</th>
+                <td>
+                    <input type="number" name="hargajual">
+                </td>
+            </tr>
+            <tr>
+                <th>Satuan</th>
+                <td>
+                    <input type="text" name="satuan">
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
