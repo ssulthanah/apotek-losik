@@ -35,3 +35,6 @@ def addobat (request) :
             satuan = satuan,
         ).save()
         return redirect('obat')
+
+def updateobat  (request) :
+    pass
