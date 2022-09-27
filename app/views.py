@@ -38,3 +38,6 @@ def addobat (request) :
 
 def updateobat  (request) :
     pass
+
+def deleteobat  (request) :
+    pass
