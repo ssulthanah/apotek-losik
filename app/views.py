@@ -3,16 +3,13 @@ import re
 from django.shortcuts import render, redirect
 from . import models
 
-
 # Create your views here.
 
 def obat(request):
     allobatobj = models.obat.objects.all()
-    getobatobj = models.obat.objects.get(idobat=1)
     
     return render (request, 'obat.html',{
-    'allobatobj' : allobatobj,
-    'getobatobj' : getobatobj
+    'allobatobj' : allobatobj    
     })
     
 def addobat (request) :
