@@ -54,3 +54,6 @@ def deleteobat(request, id):
     obatobj = models.obat.objects.get(idobat=id)
     obatobj.delete()
     return redirect('obat')
+    
+
+
