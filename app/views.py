@@ -30,14 +30,15 @@ def addobat (request) :
             hargabeli = hargabeli,
             hargajual = hargajual,
             satuan = satuan,
-        ).save()
+        )
+        newobat.save()
         return redirect('obat')
 
 def updateobat(request,id):
     obatobj = models.obat.objects.get(idobat=id)
     if request.method == "GET":
         return render(request, 'updateobat.html', {
-            'obat' : obatobj
+            'obatobj' : obatobj
         })
         
     else:
@@ -55,5 +56,45 @@ def deleteobat(request, id):
     obatobj.delete()
     return redirect('obat')
     
+def penjualan (request):
+    allpenjualanobj = models.penjualan.objects.all()
 
+    return render (request, 'penjualan.html', {
+        'allpenjualanobj': allpenjualanobj,
+    })
+
+def addpenjualan (request) :
+    if request.method == "GET" :
+        return render(request, 'addpenjualan.html')
+    else:
+        namaapoteker = request.POST['namaapoteker']
+        namapelanggan = request.POST['namapelanggan']
+        tanggaltransaksi = request.POST['tanggaltransaksi']
+
+        newobat = models.penjualan(
+            namaapoteker = namaapoteker,
+            namapelanggan = namapelanggan,
+            tanggaltransaksi = tanggaltransaksi,
+        ).save()
+        return redirect('penjualan')
+
+def updatepenjualan(request,id):
+    penjualanobj = models.penjualan.objects.get(idpenjualan=id)
+    if request.method == "GET":
+        return render(request, 'updatepenjualan.html', {
+            'penjualan' : penjualanobj
+        })
+        
+    else:
+        penjualanobj.namaapoteker = request.POST['namaapoteker']
+        penjualanobj.namapelanggan = request.POST['namapelanggan']
+        penjualanobj.tanggaltransaksi = request.POST['tanggaltransaksi']
+        penjualanobj.hargabeli = request.POST['hargabeli']
+        penjualanobj.save
+        return redirect('penjualan')
+
+def deletepenjualan(request, id):
+    penjualanobj = models.penjualan.objects.get(idpenjualan=id)
+    penjualanobj.delete()
+    return redirect('obat')
 
