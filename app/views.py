@@ -71,7 +71,7 @@ def addpenjualan (request) :
         namapelanggan = request.POST['namapelanggan']
         tanggaltransaksi = request.POST['tanggaltransaksi']
 
-        newobat = models.penjualan(
+        models.penjualan(
             namaapoteker = namaapoteker,
             namapelanggan = namapelanggan,
             tanggaltransaksi = tanggaltransaksi,
@@ -82,7 +82,7 @@ def updatepenjualan(request,id):
     penjualanobj = models.penjualan.objects.get(idpenjualan=id)
     if request.method == "GET":
         return render(request, 'updatepenjualan.html', {
-            'penjualan' : penjualanobj
+            'penjualanobj' : penjualanobj
         })
         
     else:
@@ -96,5 +96,49 @@ def updatepenjualan(request,id):
 def deletepenjualan(request, id):
     penjualanobj = models.penjualan.objects.get(idpenjualan=id)
     penjualanobj.delete()
-    return redirect('obat')
+    return redirect('penjualan')
 
+def supplier(request):
+    allsupplierobj = models.supplier.objects.all()
+
+    return render (request, 'supplier.html', {
+        'allsupplierobj': allsupplierobj,
+    })
+
+def pembelian(request):
+    allpembelianobj = models.pembelian.objects.all()
+
+    return render (request, 'pembelian.html', {
+        'allpembelianobj': allpembelianobj,
+    })
+
+def addpembelian (request) :
+    if request.method == "GET" :
+        return render(request, 'addpembelian.html')
+    else:
+        namaapoteker = request.POST['namaapoteker']
+        tanggalpembelian = request.POST['tanggalpembelian']
+
+        models.pembelian(
+            namaapoteker = namaapoteker,
+            tanggalpembelian = tanggalpembelian,
+        ).save()
+        return redirect('pembelian')
+    
+def updatepembelian(request,id):
+    pembelianobj = models.pembelian.objects.get(idpembelian=id)
+    if request.method == "GET":
+        return render(request, 'updatepembelian.html', {
+            'pembelianobj' : pembelianobj
+        })
+        
+    else:
+        pembelianobj.namaapoteker = request.POST['namaapoteker']
+        pembelianobj.tanggalpembelian = request.POST['tanggalpembelian']
+        pembelianobj.save
+        return redirect('pembelian')
+
+def deletepembelian(request, id):
+    pembelianobj = models.pembelian.objects.get(idpembelian=id)
+    pembelianobj.delete()
+    return redirect('pembelian')
