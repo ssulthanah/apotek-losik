@@ -9,7 +9,7 @@ def obat(request):
     allobatobj = models.obat.objects.all()
     
     return render (request, 'obat.html',{
-    'allobatobj' : allobatobj    
+    'allobatobj' : allobatobj,    
     })
     
 def addobat (request) :
@@ -33,8 +33,27 @@ def addobat (request) :
         ).save()
         return redirect('obat')
 
-def updateobat  (request) :
-    pass
+def updateobat(request,id):
+    obatobj = models.obat.objects.get(idobat=id)
+    if request.method == "GET":
+        return render(request, 'updateobat.html', {
+            'obat' : obatobj
+        })
+        
+    else:
+        obatobj.namaobat = request.POST['namaobat']
+        obatobj.jenisobat = request.POST['jenisobat']
+        obatobj.jumlahstock = request.POST['jumlahstock']
+        obatobj.hargabeli = request.POST['hargabeli']
+        obatobj.hargajual = request.POST['hargajual']
+        obatobj.satuan = request.POST['satuan']
+        obatobj.save
+        return redirect('obat')
 
-def deleteobat  (request) :
-    pass
+def deleteobat(request, id):
+    obatobj = models.obat.objects.get(idobat=id)
+    obatobj.delete()
+    return redirect('obat')
+    
+
+
