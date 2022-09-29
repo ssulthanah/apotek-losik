@@ -30,14 +30,15 @@ def addobat (request) :
             hargabeli = hargabeli,
             hargajual = hargajual,
             satuan = satuan,
-        ).save()
+        )
+        newobat.save()
         return redirect('obat')
 
 def updateobat(request,id):
     obatobj = models.obat.objects.get(idobat=id)
     if request.method == "GET":
         return render(request, 'updateobat.html', {
-            'obat' : obatobj
+            'obatobj' : obatobj
         })
         
     else:
