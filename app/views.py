@@ -23,15 +23,14 @@ def addobat (request) :
         hargajual = request.POST['hargajual']
         satuan = request.POST['satuan']
 
-        newobat = models.obat(
+        models.obat(
             jenisobat = jenisobat,
             namaobat = namaobat,
             jumlahstock = jumlahstock,
             hargabeli = hargabeli,
             hargajual = hargajual,
             satuan = satuan,
-        )
-        newobat.save()
+        ).save()
         return redirect('obat')
 
 def updateobat(request,id):
@@ -42,13 +41,13 @@ def updateobat(request,id):
         })
         
     else:
-        obatobj.namaobat = request.POST['namaobat']
         obatobj.jenisobat = request.POST['jenisobat']
+        obatobj.namaobat = request.POST['namaobat']
         obatobj.jumlahstock = request.POST['jumlahstock']
         obatobj.hargabeli = request.POST['hargabeli']
         obatobj.hargajual = request.POST['hargajual']
         obatobj.satuan = request.POST['satuan']
-        obatobj.save
+        obatobj.save()
         return redirect('obat')
 
 def deleteobat(request, id):
@@ -89,11 +88,10 @@ def updatepenjualan(request,id):
         penjualanobj.namaapoteker = request.POST['namaapoteker']
         penjualanobj.namapelanggan = request.POST['namapelanggan']
         penjualanobj.tanggaltransaksi = request.POST['tanggaltransaksi']
-        penjualanobj.hargabeli = request.POST['hargabeli']
-        penjualanobj.save
+        penjualanobj.save()
         return redirect('penjualan')
 
-def deletepenjualan(request, id):
+def deletepenjualan(request,id):
     penjualanobj = models.penjualan.objects.get(idpenjualan=id)
     penjualanobj.delete()
     return redirect('penjualan')
@@ -135,7 +133,7 @@ def updatepembelian(request,id):
     else:
         pembelianobj.namaapoteker = request.POST['namaapoteker']
         pembelianobj.tanggalpembelian = request.POST['tanggalpembelian']
-        pembelianobj.save
+        pembelianobj.save()
         return redirect('pembelian')
 
 def deletepembelian(request, id):
