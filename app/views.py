@@ -109,19 +109,27 @@ def supplier(request):
 
 def pembelian(request):
     allpembelianobj = models.pembelian.objects.all()
-
     return render (request, 'pembelian.html', {
-        'allpembelianobj': allpembelianobj,
+        'allpembelianobj': allpembelianobj
     })
 
 def addpembelian (request) :
+    supplierobj = models.supplier.objects.all()
     if request.method == "GET" :
-        return render(request, 'addpembelian.html')
+        return render(request, 'addpembelian.html', {
+            'supplierobj' : supplierobj
+        })
     else:
+        pembelianobj = models.pembelian.objects.filter(idsupplier = request.POST['idsupplier']).exist()
+        if pembelianobj:
+            return redirect ('pembelian')
+
+        idsupplier = request.POST['idsupplier']
         namaapoteker = request.POST['namaapoteker']
         tanggalpembelian = request.POST['tanggalpembelian']
 
         models.pembelian(
+            idsupplier = idsupplier,
             namaapoteker = namaapoteker,
             tanggalpembelian = tanggalpembelian,
         ).save()

@@ -10,6 +10,7 @@
     <h1>Pembelian</h1>
     <table>
         <tr>
+            <th>ID Pembelian</th>
             <th>ID Supplier</th>
             <th>Nama Apoteker</th>
             <th>Tanggal Pembelian</th>
@@ -17,6 +18,7 @@
         </tr>
         {% for item in allpembelianobj %}
         <tr>
+            <td>{{ item.idpembelian}}</td>
             <td>{{ item.idsupplier}}</td>
             <td>{{ item.namaapoteker}}</td>
             <td>{{ item.tanggalpembelian}}</td>

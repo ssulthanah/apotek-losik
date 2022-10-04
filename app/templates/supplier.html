@@ -10,6 +10,7 @@
     <h1>Supplier</h1>
     <table>
         <tr>
+            <th>ID Supplier</th>
             <th>Nama Supplier</th>
             <th>Alamat</th>
             <th>No Hp</th>
@@ -17,6 +18,7 @@
         </tr>
         {% for item in allsupplierobj %}
         <tr>
+            <td>{{ item.idsupplier}}</td>
             <td>{{ item.namasupplier}}</td>
             <td>{{ item.alamat}}</td>
             <td>{{ item.nohp}}</td>
