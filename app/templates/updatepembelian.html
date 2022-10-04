@@ -14,23 +14,31 @@
             <tr>
                 <th>Id Supplier</th>
                 <td>
+<<<<<<< HEAD
                     <select name="idsupplier" id = ''>
                         {% for item in datasupplier %} 
                         <option value="{{item.idsupplier}}">{{item.idsupplier}}</option>
                         {% endfor %} 
                     </select>
+=======
+                    <input type="text" name="idsupplier" value="{{allsupplierobj.idsupplier}}">
+>>>>>>> fc1c04522dac32ca56c7deb055900c385147074b
                 </td>
             </tr>
             <tr>
                 <th>Nama Apoteker</th>
                 <td>
+<<<<<<< HEAD
                     <input type="text" name = "namaapoteker" value="{{pembelianobj.namaapoteker}}">
+=======
+                    <input type="text" name="namaapoteker" value="{{pembelianobj.namaapoteker}}">
+>>>>>>> fc1c04522dac32ca56c7deb055900c385147074b
                 </td>
             </tr>
             <tr>
                 <th>Tanggal Pembelian</th>
                 <td>
-                    <input type="date" name="tanggalpembelian" value="{{penjualanobj.tanggalpembelian}}">
+                    <input type="date" name="tanggalpembelian" value="{{pembelianobj.tanggalpembelian}}">
                 </td>
             </tr>
             </table>

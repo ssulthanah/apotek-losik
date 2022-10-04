@@ -59,7 +59,6 @@ def deleteobat(request, id):
     
 def penjualan (request):
     allpenjualanobj = models.penjualan.objects.all()
-
     return render (request, 'penjualan.html', {
         'allpenjualanobj': allpenjualanobj,
     })
@@ -110,11 +109,11 @@ def supplier(request):
 def pembelian(request):
     allpembelianobj = models.pembelian.objects.all()
     return render (request, 'pembelian.html', {
-        'allpembelianobj': allpembelianobj
+        'allpembelianobj': allpembelianobj, 
     })
 
 def addpembelian (request) :
-    if request.method == "GET" :
+    if request.method == "GET" :   
         allsupplierobj = models.supplier.objects.all()
         return render(request, 'addpembelian.html', {
             'datasupplier' : allsupplierobj
@@ -124,11 +123,11 @@ def addpembelian (request) :
         getsupplierobj = models.supplier.objects.get (idsupplier= idsupplier)
         namaapoteker = request.POST['namaapoteker']
         tanggalpembelian = request.POST['tanggalpembelian']
-        
+
         newpembelian = models.pembelian(
-            idsupplier = getsupplierobj,
+            idsupplier = allsupplierobj,
             namaapoteker = namaapoteker,
-            tanggalpembelian = tanggalpembelian
+            tanggalpembelian = tanggalpembelian,
         )
         newpembelian.save()
         return redirect('pembelian')
