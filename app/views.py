@@ -59,7 +59,6 @@ def deleteobat(request, id):
     
 def penjualan (request):
     allpenjualanobj = models.penjualan.objects.all()
-
     return render (request, 'penjualan.html', {
         'allpenjualanobj': allpenjualanobj,
     })
@@ -110,29 +109,27 @@ def supplier(request):
 def pembelian(request):
     allpembelianobj = models.pembelian.objects.all()
     return render (request, 'pembelian.html', {
-        'allpembelianobj': allpembelianobj
+        'allpembelianobj': allpembelianobj, 
     })
 
 def addpembelian (request) :
-    supplierobj = models.supplier.objects.all()
-    if request.method == "GET" :
+    if request.method == "GET" :   
+        allsupplierobj = models.supplier.objects.all()
         return render(request, 'addpembelian.html', {
-            'supplierobj' : supplierobj
+            'datasupplier' : allsupplierobj
         })
-    else:
-        pembelianobj = models.pembelian.objects.filter(idsupplier = request.POST['idsupplier']).exist()
-        if pembelianobj:
-            return redirect ('pembelian')
-
+    if request.method == "POST" :
         idsupplier = request.POST['idsupplier']
-        namaapoteker = request.POST['namaapoteker']
-        tanggalpembelian = request.POST['tanggalpembelian']
+        allsupplierobj = models.supplier.objects.get(idsupplier=idsupplier)
+        namaapoteker = request.POST('namaapoteker')
+        tanggalpembelian = request.POST('tanggalpembelian')
 
-        models.pembelian(
-            idsupplier = idsupplier,
+        newpembelian = models.pembelian(
+            idsupplier = allsupplierobj,
             namaapoteker = namaapoteker,
             tanggalpembelian = tanggalpembelian,
-        ).save()
+        )
+        newpembelian.save()
         return redirect('pembelian')
     
 def updatepembelian(request,id):
