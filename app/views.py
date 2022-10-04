@@ -125,7 +125,7 @@ def addpembelian (request) :
         tanggalpembelian = request.POST['tanggalpembelian']
 
         newpembelian = models.pembelian(
-            idsupplier = allsupplierobj,
+            idsupplier = getsupplierobj,
             namaapoteker = namaapoteker,
             tanggalpembelian = tanggalpembelian,
         )
@@ -136,9 +136,11 @@ def updatepembelian(request,id):
     pembelianobj = models.pembelian.objects.get(idpembelian=id)
     if request.method == "GET":
         allsupplierobj = models.supplier.objects.all()
+        tanggalbeliobj = datetime.strftime(pembelianobj.tanggalpembelian, '%Y-%m-%d')
         return render(request, 'updatepembelian.html', {
             'pembelianobj' : pembelianobj,
-            'datasupplier' : allsupplierobj
+            'datasupplier' : allsupplierobj,
+            'tanggalbeliobj' : tanggalbeliobj
         })
         
     else:
