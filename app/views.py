@@ -7,9 +7,11 @@ from . import models
 
 def obat(request):
     allobatobj = models.obat.objects.all()
+    # getobatobj = models.obat.objects.get(idobat=5)
     
     return render (request, 'obat.html',{
-    'allobatobj' : allobatobj,    
+    'allobatobj' : allobatobj, 
+    # 'getobatobj' : getobatobj   
     })
     
 def addobat (request) :
@@ -80,8 +82,10 @@ def addpenjualan (request) :
 def updatepenjualan(request,id):
     penjualanobj = models.penjualan.objects.get(idpenjualan=id)
     if request.method == "GET":
+        tanggal = datetime.strftime(penjualanobj.tanggaltransaksi, '%d-%m-%Y')
         return render(request, 'updatepenjualan.html', {
-            'penjualanobj' : penjualanobj
+            'penjualanobj' : penjualanobj,
+            'tanggaltransaksi' : tanggal
         })
         
     else:

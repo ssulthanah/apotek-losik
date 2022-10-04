@@ -8,30 +8,68 @@
 </head>
 <body>
     <h1>Obat</h1>
+    <h3>Read All Obat</h3>
     <table>
-        <tr>
-            <th>Jenis Obat</th>
-            <th>Nama Obat</th>
-            <th>Jumlah Stock</th>
-            <th>Harga Beli</th>
-            <th>Harga Jual</th>
-            <th>Satuan</th>
-            <th>Action</th>
-        </tr>
-        {% for item in allobatobj %}
-        <tr>
-            <td>{{ item.jenisobat }}</td>
-            <td>{{ item.namaobat }}</td>
-            <td>{{ item.jumlahstock }}</td>
-            <td>{{ item.hargabeli }}</td>
-            <td>{{ item.hargajual }}</td>
-            <td>{{ item.satuan }}</td>
-            <td>
-                <a href="{% url 'updateobat' item.idobat %}"><button>Update</button></a>
-                <a href="{% url 'deleteobat' item.idobat %}"><button>Delete</button></a>
-            </td>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th>ID Obat</th>
+                <th>Jenis Obat</th>
+                <th>Nama Obat</th>
+                <th>Jumlah Stock</th>
+                <th>Harga Beli</th>
+                <th>Harga Jual</th>
+                <th>Satuan</th>
+                <th>Action</th>        
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in allobatobj %}
+            <tr>
+                <td>{{ item.idobat  }}</td>
+                <td>{{ item.jenisobat }}</td>
+                <td>{{ item.namaobat }}</td>
+                <td>{{ item.jumlahstock }}</td>
+                <td>{{ item.hargabeli }}</td>
+                <td>{{ item.hargajual }}</td>
+                <td>{{ item.satuan }}</td>
+                <td>
+                    <a href="{% url 'updateobat' item.idobat %}"><button>Update</button></a>
+                    <a href="{% url 'deleteobat' item.idobat %}"><button>Delete</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+    <!-- <h3>Read Spesific Obat</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Obat</th>
+                <th>Jenis Obat</th>
+                <th>Nama Obat</th>
+                <th>Jumlah Stock</th>
+                <th>Harga Beli</th>
+                <th>Harga Jual</th>
+                <th>Satuan</th>
+                <th>Action</th>        
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ getobatobj.idobat}}</td>
+                <td>{{ getobatobj.jenisobat}}</td>
+                <td>{{ getobatobj.namaobat}}</td>
+                <td>{{ getobatobj.jumlahstock}}</td>
+                <td>{{ getobatobj.hargabeli}}</td>
+                <td>{{ getobatobj.hargajual}}</td>
+                <td>{{ getobatobj.satuan}}</td>                
+            </tr>
+        </tbody>
+    </table> -->
+    <a href="{% url 'addobat' %}">
+        <button>
+        CREATE DATA
+        </button>
+    </a>
 </body>
 </html>
