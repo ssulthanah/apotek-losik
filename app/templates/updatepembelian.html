@@ -12,15 +12,21 @@
         {% csrf_token %}
         <table>
             <tr>
+                <th>Id Supplier</th>
+                <td>
+                    <input type="text" name="idsupplier" value="{{allsupplierobj.idsupplier}}">
+                </td>
+            </tr>
+            <tr>
                 <th>Nama Apoteker</th>
                 <td>
-                    <input type="text" name="namaapoteker" value="{{penjualanobj.namaapoteker}}">
+                    <input type="text" name="namaapoteker" value="{{pembelianobj.namaapoteker}}">
                 </td>
             </tr>
             <tr>
                 <th>Tanggal Pembelian</th>
                 <td>
-                    <input type="date" name="tanggalpembelian" value="{{penjualanobj.tanggalpembelian}}">
+                    <input type="date" name="tanggalpembelian" value="{{pembelianobj.tanggalpembelian}}">
                 </td>
             </tr>
             </table>
