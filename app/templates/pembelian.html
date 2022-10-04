@@ -8,26 +8,36 @@
 </head>
 <body>
     <h1>Pembelian</h1>
+    <h3>Read All Pembelian</h3>
     <table>
-        <tr>
-            <th>ID Pembelian</th>
-            <th>ID Supplier</th>
-            <th>Nama Apoteker</th>
-            <th>Tanggal Pembelian</th>
-            <th>Action</th>
-        </tr>
-        {% for item in allpembelianobj %}
-        <tr>
-            <td>{{ item.idpembelian}}</td>
-            <td>{{ item.idsupplier}}</td>
-            <td>{{ item.namaapoteker}}</td>
-            <td>{{ item.tanggalpembelian}}</td>
-            <td>
-                <a href="{% url 'updatepembelian' item.idpembelian %}"><button>Update</button></a>
-                <a href="{% url 'deletepembelian' item.idpembelian %}"><button>Delete</button></a>
-            </td>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th>ID Pembelian</th>
+                <th>ID Supplier</th>
+                <th>Nama Apoteker</th>
+                <th>Tanggal Pembelian</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in allpembelianobj %}
+            <tr>
+                <td>{{ item.idpembelian}}</td>
+                <td>{{ item.idsupplier}}</td>
+                <td>{{ item.namaapoteker}}</td>
+                <td>{{ item.tanggalpembelian}}</td>
+                <td>
+                    <a href="{% url 'updatepembelian' item.idpembelian %}"><button>Update</button></a>
+                    <a href="{% url 'deletepembelian' item.idpembelian %}"><button>Delete</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
+    <a href="{% url 'addpembelian' %}">
+        <button>
+        CREATE DATA
+        </button>
+    </a>
 </body>
 </html>

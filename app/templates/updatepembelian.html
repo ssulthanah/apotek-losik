@@ -12,9 +12,19 @@
         {% csrf_token %}
         <table>
             <tr>
+                <th>Id Supplier</th>
+                <td>
+                    <select name="idsupplier" id = ''>
+                        {% for item in datasupplier %} 
+                        <option value="{{item.idsupplier}}">{{item.idsupplier}}</option>
+                        {% endfor %} 
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <th>Nama Apoteker</th>
                 <td>
-                    <input type="text" name="namaapoteker" value="{{penjualanobj.namaapoteker}}">
+                    <input type="text" name = "namaapoteker" value="{{pembelianobj.namaapoteker}}">
                 </td>
             </tr>
             <tr>
