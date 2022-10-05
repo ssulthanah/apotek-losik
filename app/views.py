@@ -23,7 +23,6 @@ def addobat (request) :
     else:
         jenisobat = request.POST['jenisobat']
         namaobat = request.POST['namaobat']
-        jumlahstock = request.POST['jumlahstock']
         hargabeli = request.POST['hargabeli']
         hargajual = request.POST['hargajual']
         satuan = request.POST['satuan']
@@ -31,7 +30,6 @@ def addobat (request) :
         models.obat(
             jenisobat = jenisobat,
             namaobat = namaobat,
-            jumlahstock = jumlahstock,
             hargabeli = hargabeli,
             hargajual = hargajual,
             satuan = satuan,
@@ -47,7 +45,6 @@ def updateobat(request,id):
     else:
         obatobj.jenisobat = request.POST['jenisobat']
         obatobj.namaobat = request.POST['namaobat']
-        obatobj.jumlahstock = request.POST['jumlahstock']
         obatobj.hargabeli = request.POST['hargabeli']
         obatobj.hargajual = request.POST['hargajual']
         obatobj.satuan = request.POST['satuan']
@@ -169,5 +166,17 @@ def deletepembelian(request, id):
     pembelianobj = models.pembelian.objects.get(idpembelian=id)
     pembelianobj.delete()
     return redirect('pembelian')
+
+def adddetailpenjualan(request, id):
+    OrderFormSet = inlineformset_factory(models.penjualan, models.detailpenjualan, fields = ('idobat', 'jumlahobatterjual'))
+    penjualan = models.penjualan.objects.get(idpenjualan = id)
+    formset = OrderFormSet (instance = penjualan)
+    if request.method == 'POST':
+        formset = OrderFormSet (request.POST, instance = penjualan)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+    context = {'formset' : formset}
+    return render (request, 'adddetailpenjualan.html', context)
 
 
