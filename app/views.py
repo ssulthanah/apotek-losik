@@ -1,9 +1,12 @@
 from datetime import datetime
-import re
 from django.shortcuts import render, redirect
 from . import models
+from django.forms import inlineformset_factory
 
 # Create your views here.
+
+# def dashboard(request):
+#     dataobat = models.obat.objects.filter ()
 
 def obat(request):
     allobatobj = models.obat.objects.all()
@@ -107,9 +110,11 @@ def supplier(request):
     })
 
 def pembelian(request):
+    # pembelian = models.pembelian.get(id = pk)
     allpembelianobj = models.pembelian.objects.all()
     return render (request, 'pembelian.html', {
-        'allpembelianobj': allpembelianobj, 
+        'allpembelianobj': allpembelianobj,
+
     })
 
 def addpembelian (request) :
@@ -120,7 +125,7 @@ def addpembelian (request) :
         })
     if request.method == "POST":
         idsupplier = request.POST['idsupplier']
-        getsupplierobj = models.supplier.objects.get (idsupplier= idsupplier)
+        getsupplierobj = models.supplier.objects.get(idsupplier= idsupplier)
         namaapoteker = request.POST['namaapoteker']
         tanggalpembelian = request.POST['tanggalpembelian']
 
@@ -131,6 +136,18 @@ def addpembelian (request) :
         )
         newpembelian.save()
         return redirect('pembelian')
+
+def adddetailpembelian(request, id):
+    OrderFormSet = inlineformset_factory(models.pembelian, models.detailpembelian, fields = ('idobat', 'jumlahobatdibeli'))
+    pembelian = models.pembelian.objects.get(idpembelian = id)
+    formset = OrderFormSet (instance = pembelian)
+    if request.method == 'POST':
+        formset = OrderFormSet (request.POST, instance = pembelian)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+    context = {'formset' : formset}
+    return render (request, 'adddetailpembelian.html', context)
     
 def updatepembelian(request,id):
     pembelianobj = models.pembelian.objects.get(idpembelian=id)
