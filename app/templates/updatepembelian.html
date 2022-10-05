@@ -12,7 +12,7 @@
         {% csrf_token %}
         <table>
             <tr>
-                <th>Id Supplier</th>
+                <th>Nama Supplier</th>
                 <td>
                     <select name="idsupplier" id = ''>
                         {% for item in datasupplier %} 
@@ -30,7 +30,11 @@
             <tr>
                 <th>Tanggal Pembelian</th>
                 <td>
+<<<<<<< HEAD
                     <input required type="date" name="tanggalpembelian" value="{{tanggal}}">
+=======
+                    <input type="date" name="tanggalpembelian" value="{{pembelianobj.tanggalpembelian}}">
+>>>>>>> 7129c1642901c29aba48416733169903ba7ba7f1
                 </td>
             </tr>
             </table>

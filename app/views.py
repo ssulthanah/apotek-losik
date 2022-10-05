@@ -5,6 +5,9 @@ from django.forms import inlineformset_factory
 
 # Create your views here.
 
+# def dashboard(request):
+#     dataobat = models.obat.objects.filter ()
+
 def obat(request):
     allobatobj = models.obat.objects.all()
     # getobatobj = models.obat.objects.get(idobat=5)
@@ -106,9 +109,11 @@ def supplier(request):
     })
 
 def pembelian(request):
+    # pembelian = models.pembelian.get(id = pk)
     allpembelianobj = models.pembelian.objects.all()
     return render (request, 'pembelian.html', {
-        'allpembelianobj': allpembelianobj, 
+        'allpembelianobj': allpembelianobj,
+
     })
 
 def addpembelian (request) :
@@ -119,7 +124,7 @@ def addpembelian (request) :
         })
     if request.method == "POST":
         idsupplier = request.POST['idsupplier']
-        getsupplierobj = models.supplier.objects.get (idsupplier= idsupplier)
+        getsupplierobj = models.supplier.objects.get(idsupplier= idsupplier)
         namaapoteker = request.POST['namaapoteker']
         tanggalpembelian = request.POST['tanggalpembelian']
 
