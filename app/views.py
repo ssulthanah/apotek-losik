@@ -44,7 +44,6 @@ def updateobat(request,id):
         return render(request, 'updateobat.html', {
             'obatobj' : obatobj
         })
-        
     else:
         obatobj.jenisobat = request.POST['jenisobat']
         obatobj.namaobat = request.POST['namaobat']
@@ -84,10 +83,10 @@ def addpenjualan (request) :
 def updatepenjualan(request,id):
     penjualanobj = models.penjualan.objects.get(idpenjualan=id)
     if request.method == "GET":
-        tanggal = datetime.strftime(penjualanobj.tanggaltransaksi, '%d-%m-%Y')
+        tanggal = datetime.strftime(penjualanobj.tanggaltransaksi, '%Y-%m-%d')
         return render(request, 'updatepenjualan.html', {
             'penjualanobj' : penjualanobj,
-            'tanggaltransaksi' : tanggal
+            'tanggal' : tanggal
         })
         
     else:
@@ -153,11 +152,11 @@ def updatepembelian(request,id):
     pembelianobj = models.pembelian.objects.get(idpembelian=id)
     if request.method == "GET":
         allsupplierobj = models.supplier.objects.all()
-        tanggalbeliobj = datetime.strftime(pembelianobj.tanggalpembelian, '%Y-%m-%d')
+        tanggal = datetime.strftime(pembelianobj.tanggalpembelian, '%Y-%m-%d')
         return render(request, 'updatepembelian.html', {
             'pembelianobj' : pembelianobj,
             'datasupplier' : allsupplierobj,
-            'tanggalbeliobj' : tanggalbeliobj
+            'tanggal' : tanggal
         })
         
     else:
@@ -170,3 +169,5 @@ def deletepembelian(request, id):
     pembelianobj = models.pembelian.objects.get(idpembelian=id)
     pembelianobj.delete()
     return redirect('pembelian')
+
+
