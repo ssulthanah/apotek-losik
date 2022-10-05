@@ -15,4 +15,5 @@ urlpatterns = [
     path('addpembelian', views.addpembelian,name='addpembelian'),
     path('updatepembelian/<str:id>',views.updatepembelian,name='updatepembelian'),
     path('deletepembelian/<str:id>',views.deletepembelian,name='deletepembelian'),
+    path('adddetailpembelian/<str:id>', views.adddetailpembelian, name = 'adddetailpembelian')
 ]
