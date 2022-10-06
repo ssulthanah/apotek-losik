@@ -29,6 +29,7 @@
                 <td>
                     <a href="{% url 'updatepembelian' item.idpembelian %}"><button>Update</button></a>
                     <a href="{% url 'deletepembelian' item.idpembelian %}"><button>Delete</button></a>
+                    <a href="{% url 'adddetailpembelian' item.idpembelian %}"><button>Order</button></a>
                 </td>
             </tr>
             {% endfor %}

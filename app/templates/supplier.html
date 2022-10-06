@@ -22,8 +22,17 @@
             <td>{{ item.namasupplier}}</td>
             <td>{{ item.alamat}}</td>
             <td>{{ item.nohp}}</td>
+            <td>
+                <a href="{% url 'updatesupplier' item.idsupplier %}"><button>Update</button></a>
+                <a href="{% url 'deletesupplier' item.idsupplier %}"><button>Delete</button></a>
+            </td>
         </tr>
         {% endfor %}
     </table>
+    <a href="{% url 'addsupplier' %}">
+        <button>
+        CREATE DATA
+        </button>
+    </a>
 </body>
 </html>

@@ -16,7 +16,7 @@
                 <td>
                     <select name="idsupplier" id=''>
                         {% for item in datasupplier %}
-                        <option value="{{item.idsupplier}}">{{item.idsupplier}}</option>
+                        <option value="{{item.idsupplier}}">{{item.namasupplier}}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -24,13 +24,13 @@
             <tr>
                 <th>Nama Apoteker</th>
                 <td>
-                    <input type="text" name = "namaapoteker">
+                    <input required type="text" name = "namaapoteker">
                 </td>
             </tr>
             <tr>
                 <th>Tanggal Pembelian</th>
                 <td>
-                    <input type="date" name="tanggalpembelian">
+                    <input required type="date" name="tanggalpembelian">
                 </td>
             </tr>
         </table>
