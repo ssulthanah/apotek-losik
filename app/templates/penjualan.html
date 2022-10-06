@@ -23,6 +23,7 @@
             <td>
                 <a href="{% url 'updatepenjualan' item.idpenjualan %}"><button>Update</button></a>
                 <a href="{% url 'deletepenjualan' item.idpenjualan %}"><button>Delete</button></a>
+                <a href="{% url 'adddetailpenjualan' item.idpenjualan %}"><button>Order</button></a>
             </td>
         </tr>
         {% endfor %}

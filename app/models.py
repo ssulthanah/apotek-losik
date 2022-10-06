@@ -5,7 +5,6 @@ class obat(models.Model):
     idobat = models.AutoField(primary_key=True)
     jenisobat = models.CharField(max_length=50)
     namaobat = models.CharField(max_length=10)
-    jumlahstock = models.IntegerField()
     hargabeli = models.IntegerField()
     hargajual = models.IntegerField()
     satuan = models.CharField(max_length=10)

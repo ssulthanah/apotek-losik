@@ -6,7 +6,31 @@ from django.forms import inlineformset_factory
 # Create your views here.
 
 # def dashboard(request):
-#     dataobat = models.obat.objects.filter ()
+#     # Kamar tersedia laki-laki
+#     kamartersediapa = models.kamar.objects.filter(status = False, jenis = 'laki-laki').count()
+#     # kamar tersedia perempuan
+#     kamartersediapi = models.kamar.objects.filter(status = False, jenis = "perempuan").count()
+#     # Total Pemesanan  
+#     totalpesan = models.penyewaan.objects.all().count()
+#     # Total charge
+#     totalcharge = models.charge.objects.all().count()
+
+# getdatabeli = models.detailpembelian.all()
+# getdatajual = models.detailpenjualan.all()
+
+#     for i in getdatabeli
+#         total_pembelian = getdatabeli.idobat.hargabeli*models.detailpembelian.kuantitas
+        
+#         total_penualan
+#     total_profit =  total_pembelian - total penjualan
+
+#     return render(request,'index.html',{
+#         'kamartersediapa' : kamartersediapa,
+#         'kamarterserdiapi' : kamartersediapi,
+#         'totalpemesanan' : totalpesan,
+#         'totalcharge' : totalcharge,
+
+#     })
 
 def obat(request):
     allobatobj = models.obat.objects.all()
@@ -23,7 +47,6 @@ def addobat (request) :
     else:
         jenisobat = request.POST['jenisobat']
         namaobat = request.POST['namaobat']
-        jumlahstock = request.POST['jumlahstock']
         hargabeli = request.POST['hargabeli']
         hargajual = request.POST['hargajual']
         satuan = request.POST['satuan']
@@ -31,7 +54,6 @@ def addobat (request) :
         models.obat(
             jenisobat = jenisobat,
             namaobat = namaobat,
-            jumlahstock = jumlahstock,
             hargabeli = hargabeli,
             hargajual = hargajual,
             satuan = satuan,
@@ -47,7 +69,6 @@ def updateobat(request,id):
     else:
         obatobj.jenisobat = request.POST['jenisobat']
         obatobj.namaobat = request.POST['namaobat']
-        obatobj.jumlahstock = request.POST['jumlahstock']
         obatobj.hargabeli = request.POST['hargabeli']
         obatobj.hargajual = request.POST['hargajual']
         obatobj.satuan = request.POST['satuan']
@@ -108,6 +129,39 @@ def supplier(request):
         'allsupplierobj': allsupplierobj,
     })
 
+def addsupplier(request):
+    if request.method == "GET" :
+        return render(request, 'addsupplier.html')
+    else:
+        namasupplier = request.POST['namasupplier']
+        alamat = request.POST['alamat']
+        nohp = request.POST['nohp']
+
+        models.supplier(
+            namasupplier = namasupplier,
+            alamat = alamat,
+            nohp = nohp,
+        ).save()
+        return redirect('supplier')
+
+def updatesupplier(request,id):
+    supplierobj = models.supplier.objects.get(idsupplier=id)
+    if request.method == "GET":
+        return render(request, 'updatesupplier.html', {
+            'supplierobj' : supplierobj
+        })
+    else:
+        supplierobj.namasupplier = request.POST['namasupplier']
+        supplierobj.alamat = request.POST['alamat']
+        supplierobj.nohp = request.POST['nohp']
+        supplierobj.save()
+        return redirect('supplier')
+
+def deletesupplier(request,id):
+    supplierobj = models.supplier.objects.get(idsupplier=id)
+    supplierobj.delete()
+    return redirect('supplier')
+
 def pembelian(request):
     # pembelian = models.pembelian.get(id = pk)
     allpembelianobj = models.pembelian.objects.all()
@@ -142,9 +196,9 @@ def adddetailpembelian(request, id):
     formset = OrderFormSet (instance = pembelian)
     if request.method == 'POST':
         formset = OrderFormSet (request.POST, instance = pembelian)
-        if formset.is_valid():
+        if formset.is_valid():  
             formset.save()
-            return redirect('/')
+            return redirect('pembelian')
     context = {'formset' : formset}
     return render (request, 'adddetailpembelian.html', context)
     
@@ -169,5 +223,17 @@ def deletepembelian(request, id):
     pembelianobj = models.pembelian.objects.get(idpembelian=id)
     pembelianobj.delete()
     return redirect('pembelian')
+
+def adddetailpenjualan(request, id):
+    OrderFormSet = inlineformset_factory(models.penjualan, models.detailpenjualan, fields = ('idobat', 'jumlahobatterjual'))
+    penjualan = models.penjualan.objects.get(idpenjualan = id)
+    formset = OrderFormSet (instance = penjualan)
+    if request.method == 'POST':
+        formset = OrderFormSet (request.POST, instance = penjualan)
+        if formset.is_valid():
+            formset.save()
+            return redirect('penjualan')
+    context = {'formset' : formset}
+    return render (request, 'adddetailpenjualan.html', context)
 
 
